@@ -23,19 +23,19 @@ class User extends BS_Controller {
   }
 
   public function authenticate() {
-    $netid = $this->input->post('username', TRUE);
-    if ( ! $netid) {
+    $username = $this->input->post('username', TRUE);
+    if ( ! $username) {
       return FALSE;
     }
-    $user = $this->users->get_by(array('netid' => $netid));
+    $user = $this->users->get_by(array('username' => $username));
     if ( ! $user) {
       $new_user = array(
-        'netid' => $netid,
+        'username' => $username,
         'email' => 'john@example.edu',
         'first_name' => 'John',
       );
       $this->user_model->add_user($new_user);
-      $user = $this->users->insert(array('netid' => $netid));
+      $user = $this->users->insert(array('username' => $username));
     }
     return $user;
   }
